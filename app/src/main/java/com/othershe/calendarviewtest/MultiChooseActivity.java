@@ -10,10 +10,14 @@ import com.othershe.calendarview.DateBean;
 import com.othershe.calendarview.listener.OnMonthItemChooseListener;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MultiChooseActivity extends AppCompatActivity {
 
     private CalendarView calendarView;
     private TextView chooseDate;
+    private static List<String> mChooseDateList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class MultiChooseActivity extends AppCompatActivity {
         chooseDate = (TextView) findViewById(R.id.choose_date);
 
         calendarView = (CalendarView) findViewById(R.id.calendar);
+        calendarView.setChoosedDate(mChooseDateList);
         calendarView.init();
 
         DateBean date = calendarView.getDateInit();
@@ -36,14 +41,17 @@ public class MultiChooseActivity extends AppCompatActivity {
         sb.append("选中：" + d + "\n");
         chooseDate.setText(sb.toString());
 
+
         calendarView.setOnMonthItemChooseListener(new OnMonthItemChooseListener() {
             @Override
             public void onMonthItemChoose(View view, DateBean date, boolean flag) {
                 String d = date.getSolar()[0] + "." + date.getSolar()[1] + "." + date.getSolar()[2] + ".";
                 if (flag) {//选中
                     sb.append("选中：" + d + "\n");
+                    mChooseDateList.add(d);
                 } else {//取消选中
                     sb.append("取消：" + d + "\n");
+                    mChooseDateList.remove(mChooseDateList.indexOf(d));
                 }
                 chooseDate.setText(sb.toString());
             }
