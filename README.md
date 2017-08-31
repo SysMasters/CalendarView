@@ -7,6 +7,7 @@
 * 4、单选、多选
 * 5、跳转到指定日期
 * 6、通过自定义属性定制日期外观，以及简单的日期item布局配置
+* 7、多选时设置回显(新增)
 
 #### [基本原理介绍](http://www.jianshu.com/p/304c8e70d0bd)    
 #### [demo下载](https://fir.im/vehj?release_id=59154975ca87a8790e00015b)
@@ -84,8 +85,16 @@ calendarView.setOnMonthItemChooseListener(new OnMonthItemChooseListener() {
                //flag=true代表选中数据，flag=false代表取消选中
             }
         });
+        
 *注意：点击和多选操作不要同时使用
-
+```
+**Step 5.设置回显日期**
+```java
+List<String> list = new ArrayList<>();
+list.add("2017.08.09");
+list.add("2017.08.11");
+list.add("2017.08.12");
+calendarView.setChoosedDate(list);
 ```
 ### CalendarView相关方法：
 |方法名|描述
@@ -121,7 +130,7 @@ namespace：xmlns:calendarview="http://schemas.android.com/apk/res-auto"
 |color_holiday|color|节假日、节气的颜色
 |color_choose|color|选中的日期颜色
 |day_bg|reference|选中的日期背景(图片)
-|新增 disable_date|string|禁用以后的所有日期
+|disable_date(新增)|string|禁用以后的所有日期
 
 ### WeekView的自定义属性
 namespace：xmlns:weekview="http://schemas.android.com/apk/res-auto"
