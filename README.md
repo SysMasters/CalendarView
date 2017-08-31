@@ -122,6 +122,8 @@ namespace：xmlns:calendarview="http://schemas.android.com/apk/res-auto"
 |color_choose|color|选中的日期颜色
 |day_bg|reference|选中的日期背景(图片)
 
+|disable_date|string|禁用以后的所有日期
+
 ### WeekView的自定义属性
 namespace：xmlns:weekview="http://schemas.android.com/apk/res-auto"
 
