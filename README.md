@@ -88,7 +88,7 @@ calendarView.setOnMonthItemChooseListener(new OnMonthItemChooseListener() {
         
 *注意：点击和多选操作不要同时使用
 ```
-**Step 5.设置回显日期**
+**Step 5.设置回显日期**(新增)
 ```java
 List<String> list = new ArrayList<>();
 list.add("2017.08.09");
