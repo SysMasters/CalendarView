@@ -15,6 +15,7 @@ import com.othershe.calendarview.utils.CalendarUtil;
 import com.othershe.calendarview.utils.SolarUtil;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class CalendarView extends ViewPager {
     //记录当前PagerAdapter的position
@@ -25,6 +26,7 @@ public class CalendarView extends ViewPager {
     private OnMonthItemChooseListener itemChooseListener;
     private CalendarViewAdapter calendarViewAdapter;
     private int item_layout;
+    private List<String> mChooseDateList;
 
     private int[] dateStart;//日历的开始年、月
     private int[] dateEnd;//日历的结束年、月
@@ -34,6 +36,7 @@ public class CalendarView extends ViewPager {
     private boolean showHoliday = true;//是否显示节假日(不显示农历则节假日无法显示，节假日会覆盖农历显示)
     private boolean showTerm = true;//是否显示节气
     private boolean disableBefore = false;//是否禁用默认选中日期前的所有日期
+    private String disableDate;//禁用日期后的日期
     private boolean switchChoose = true;//单选时切换月份，是否选中上次的日期
     private int colorSolar = Color.BLACK;//阳历的日期颜色
     private int colorLunar = Color.parseColor("#999999");//阴历的日期颜色
@@ -98,6 +101,8 @@ public class CalendarView extends ViewPager {
                 colorChoose = ta.getColor(attr, colorChoose);
             } else if (attr == R.styleable.CalendarView_day_bg) {
                 dayBg = ta.getResourceId(attr, dayBg);
+            } else if (attr == R.styleable.CalendarView_disable_date) {
+                disableDate = ta.getString(attr);
             }
         }
 
@@ -126,9 +131,9 @@ public class CalendarView extends ViewPager {
         count = (dateEnd[0] - dateStart[0]) * 12 + dateEnd[1] - dateStart[1] + 1;
         calendarPagerAdapter = new CalendarPagerAdapter(count);
         calendarPagerAdapter.setAttrValues(dateInit, dateStart,
-                showLastNext, showLunar, showHoliday, showTerm, disableBefore,
+                showLastNext, showLunar, showHoliday, showTerm, disableBefore, disableDate,
                 colorSolar, colorLunar, colorHoliday, colorChoose,
-                sizeSolar, sizeLunar, dayBg);
+                sizeSolar, sizeLunar, dayBg, mChooseDateList);
 
         calendarPagerAdapter.setOnCalendarViewAdapter(item_layout, calendarViewAdapter);
 
@@ -352,5 +357,18 @@ public class CalendarView extends ViewPager {
      */
     public DateBean getDateInit() {
         return CalendarUtil.getDateBean(dateInit[0], dateInit[1], dateInit[2]);
+    }
+
+    /**
+     * 设置已选中日期
+     *
+     * @param chooseDateList
+     */
+    public void setChoosedDate(List<String> chooseDateList) {
+        this.mChooseDateList = chooseDateList;
+    }
+
+    public List<String> getChooseDateList() {
+        return mChooseDateList;
     }
 }
