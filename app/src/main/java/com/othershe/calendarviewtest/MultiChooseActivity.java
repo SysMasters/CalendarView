@@ -32,6 +32,7 @@ public class MultiChooseActivity extends AppCompatActivity {
 
         calendarView = (CalendarView) findViewById(R.id.calendar);
         calendarView.setChoosedDate(mChooseDateList);
+        calendarView.setDisableDate("2017.09.23");
         calendarView.init();
 
         DateBean date = calendarView.getDateInit();

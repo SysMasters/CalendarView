@@ -371,4 +371,8 @@ public class CalendarView extends ViewPager {
     public List<String> getChooseDateList() {
         return mChooseDateList;
     }
+
+    public void setDisableDate(String disableDate) {
+        this.disableDate = disableDate;
+    }
 }
