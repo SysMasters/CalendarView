@@ -52,7 +52,9 @@ public class MultiChooseActivity extends AppCompatActivity {
                     mChooseDateList.add(d);
                 } else {//取消选中
                     sb.append("取消：" + d + "\n");
-                    mChooseDateList.remove(mChooseDateList.indexOf(d));
+                    if (mChooseDateList.contains(d)) {
+                        mChooseDateList.remove(mChooseDateList.indexOf(d));
+                    }
                 }
                 chooseDate.setText(sb.toString());
             }
