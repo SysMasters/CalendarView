@@ -38,6 +38,7 @@ public class MonthView extends ViewGroup {
     private boolean showTerm;
     private boolean disableBefore;
     private String disableDate;
+    private String disableBeforeDate;
     private int colorSolar;
     private int colorLunar;
     private int colorHoliday;
@@ -184,6 +185,25 @@ public class MonthView extends ViewGroup {
                         continue;
                     }
                 }
+                if (!TextUtils.isEmpty(disableBeforeDate)){
+                    String[] dateStr = disableBeforeDate.split("\\.");
+                    int[] dateInit = new int[3];
+                    for (int j = 0; j < dateStr.length; j++) {
+                        dateInit[j] = Integer.parseInt(dateStr[j]);
+                    }
+                    if ((date.getSolar()[0] < dateInit[0]
+                            || (date.getSolar()[0] == dateInit[0] && date.getSolar()[1] < dateInit[1])
+                            || (date.getSolar()[0] == dateInit[0] && date.getSolar()[1] == dateInit[1] && date.getSolar()[2] < dateInit[2]))) {
+                        if (disableBefore) {
+                            solarDay.setTextColor(colorLunar);
+                            lunarDay.setTextColor(colorLunar);
+                            view.setTag(-1);
+                            addView(view, i);
+                            continue;
+                        }
+                    }
+                }
+
                 if (!TextUtils.isEmpty(disableDate)) {
                     String[] dateStr = disableDate.split("\\.");
                     int[] dateInit = new int[3];
@@ -264,6 +284,9 @@ public class MonthView extends ViewGroup {
     }
 
     private void setDayColor(View v, int type) {
+        if (v == null){
+            return;
+        }
         TextView solarDay = (TextView) v.findViewById(R.id.solar_day);
         TextView lunarDay = (TextView) v.findViewById(R.id.lunar_day);
         solarDay.setTextSize(sizeSolar);
@@ -396,7 +419,7 @@ public class MonthView extends ViewGroup {
     }
 
     public void setAttrValues(int[] dateInit,
-                              boolean showLastNext, boolean showLunar, boolean showHoliday, boolean showTerm, boolean disableBefore, String disableDate,
+                              boolean showLastNext, boolean showLunar, boolean showHoliday, boolean showTerm, boolean disableBefore, String disableBeforeDate,String disableDate,
                               int colorSolar, int colorLunar, int colorHoliday, int colorChoose,
                               int sizeSolar, int sizeLunar, int dayBg, List<String> chooseDateList) {
         this.dateInit = dateInit;
@@ -414,6 +437,7 @@ public class MonthView extends ViewGroup {
         this.sizeLunar = sizeLunar;
         this.dayBg = dayBg;
         this.chooseDateList = chooseDateList;
+        this.disableBeforeDate = disableBeforeDate;
     }
 
     public void setOnCalendarViewAdapter(int item_layout, CalendarViewAdapter calendarViewAdapter) {

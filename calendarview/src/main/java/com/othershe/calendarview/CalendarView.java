@@ -36,7 +36,8 @@ public class CalendarView extends ViewPager {
     private boolean showHoliday = true;//是否显示节假日(不显示农历则节假日无法显示，节假日会覆盖农历显示)
     private boolean showTerm = true;//是否显示节气
     private boolean disableBefore = false;//是否禁用默认选中日期前的所有日期
-    private String disableDate;//禁用日期后的日期
+    private String disableAfter;//禁用日期后的日期
+    private String disableBeforeDate;
     private boolean switchChoose = true;//单选时切换月份，是否选中上次的日期
     private int colorSolar = Color.BLACK;//阳历的日期颜色
     private int colorLunar = Color.parseColor("#999999");//阴历的日期颜色
@@ -102,7 +103,7 @@ public class CalendarView extends ViewPager {
             } else if (attr == R.styleable.CalendarView_day_bg) {
                 dayBg = ta.getResourceId(attr, dayBg);
             } else if (attr == R.styleable.CalendarView_disable_date) {
-                disableDate = ta.getString(attr);
+                disableAfter = ta.getString(attr);
             }
         }
 
@@ -131,7 +132,7 @@ public class CalendarView extends ViewPager {
         count = (dateEnd[0] - dateStart[0]) * 12 + dateEnd[1] - dateStart[1] + 1;
         calendarPagerAdapter = new CalendarPagerAdapter(count);
         calendarPagerAdapter.setAttrValues(dateInit, dateStart,
-                showLastNext, showLunar, showHoliday, showTerm, disableBefore, disableDate,
+                showLastNext, showLunar, showHoliday, showTerm, disableBefore, disableBeforeDate,disableAfter,
                 colorSolar, colorLunar, colorHoliday, colorChoose,
                 sizeSolar, sizeLunar, dayBg, mChooseDateList);
 
@@ -372,7 +373,11 @@ public class CalendarView extends ViewPager {
         return mChooseDateList;
     }
 
-    public void setDisableDate(String disableDate) {
-        this.disableDate = disableDate;
+    public void setDisableAfter(String disableDate) {
+        this.disableAfter = disableDate;
+    }
+
+    public void setDisableBefore(String disableBefore) {
+        this.disableBeforeDate = disableBefore;
     }
 }
