@@ -102,8 +102,10 @@ public class CalendarView extends ViewPager {
                 colorChoose = ta.getColor(attr, colorChoose);
             } else if (attr == R.styleable.CalendarView_day_bg) {
                 dayBg = ta.getResourceId(attr, dayBg);
-            } else if (attr == R.styleable.CalendarView_disable_date) {
+            } else if (attr == R.styleable.CalendarView_disable_after_date) {
                 disableAfter = ta.getString(attr);
+            } else if (attr == R.styleable.CalendarView_disable_before_date) {
+                disableBeforeDate = ta.getString(attr);
             }
         }
 
@@ -132,7 +134,7 @@ public class CalendarView extends ViewPager {
         count = (dateEnd[0] - dateStart[0]) * 12 + dateEnd[1] - dateStart[1] + 1;
         calendarPagerAdapter = new CalendarPagerAdapter(count);
         calendarPagerAdapter.setAttrValues(dateInit, dateStart,
-                showLastNext, showLunar, showHoliday, showTerm, disableBefore, disableBeforeDate,disableAfter,
+                showLastNext, showLunar, showHoliday, showTerm, disableBefore, disableBeforeDate, disableAfter,
                 colorSolar, colorLunar, colorHoliday, colorChoose,
                 sizeSolar, sizeLunar, dayBg, mChooseDateList);
 

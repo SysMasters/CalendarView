@@ -16,7 +16,9 @@
         <!--默认展示、选中的日期(xxxx.x.x)-->
         <attr name="date_init" format="string" />
         <!--是否禁用设置日期后的所有日期-->
-        <attr name="disable_date" format="string" />
+        <attr name="disable_after_date" format="string" />
+        <!--是否禁用设置日期前的所有日期-->
+        <attr name="disable_before_date" format="string" />
         <!--是否禁用默认选中日期前的所有日期-->
         <attr name="disable_before" format="boolean" />
         <!--阳历的日期颜色-->
