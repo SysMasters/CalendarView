@@ -122,6 +122,8 @@ namespace：xmlns:calendarview="http://schemas.android.com/apk/res-auto"
 |date_end|string|日历的结束年月（例如：2025.12）|2049.12
 |date_init|string|日历默认展示、选中的日期(例如：2017.5.20)，不设置则为当天
 |disable_before|boolean|是否禁用默认选中日期前的所有日期|false
+|disable_after_date(支持代码设置)|string|禁用设置日期后的所有日期（例如：2071.08.12）
+|disable_before_date(支持代码设置)|string|禁用设置日期前的所有日期（例如：2071.08.12）
 |switch_choose|boolean|单选时切换月份，是否选中上次的日期|true
 |color_solar|color|阳历日期的颜色
 |size_solar|integer|阳历的日期尺寸|14
@@ -130,7 +132,6 @@ namespace：xmlns:calendarview="http://schemas.android.com/apk/res-auto"
 |color_holiday|color|节假日、节气的颜色
 |color_choose|color|选中的日期颜色
 |day_bg|reference|选中的日期背景(图片)
-|disable_date(新增)|string|禁用以后的所有日期（例如：2071.08.12）
 
 ### WeekView的自定义属性
 namespace：xmlns:weekview="http://schemas.android.com/apk/res-auto"
